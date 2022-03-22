@@ -1,0 +1,41 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: StrategyCommonChefLPProxy
+    network: chapel
+    source:
+      address: "0xE795dE67F461A01d2dE9612Fa002dC34eB7c71c2"
+      abi: StrategyCommonChefLPProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Deposit
+        - OwnershipTransferred
+        - Paused
+        - StratHarvest
+        - TombFees
+        - Unpaused
+        - Withdraw
+      abis:
+        - name: StrategyCommonChefLPProxy
+          file: ./abis/StrategyCommonChefLPProxy.json
+      eventHandlers:
+        - event: Deposit(uint256)
+          handler: handleDeposit
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: StratHarvest(indexed address,uint256,uint256)
+          handler: handleStratHarvest
+        - event: TombFees(uint256)
+          handler: handleTombFees
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: Withdraw(uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.ts
