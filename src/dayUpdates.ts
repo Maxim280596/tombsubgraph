@@ -61,6 +61,7 @@ export function updateStrategyDayData(event: StratHarvest): StrategyDayData {
   let powAPR = pow(indexForAutoComaundAPY, 1460)
   powAPR = powAPR.minus(BigDecimal.fromString('1'))
   powAPR = powAPR.times(BigDecimal.fromString('100'))
+  
   // let step1 = strategyDayData.dailyAPRRaw.div(BigInt.fromI32(100))
   // let step2 = step1.div(BigInt.fromI32(1460))
 
