@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
@@ -6,8 +6,9 @@ dataSources:
     name: StrategyCommonChefLPProxy
     network: chapel
     source:
-      address: "0xE795dE67F461A01d2dE9612Fa002dC34eB7c71c2"
+      address: "0x72e77C6256EcBF43Aed2f9ccA6Ea2d62E0591DEB"
       abi: StrategyCommonChefLPProxy
+      startBlock: 17807400
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
