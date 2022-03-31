@@ -8,25 +8,23 @@ dataSources:
     source:
       address: "0x72e77C6256EcBF43Aed2f9ccA6Ea2d62E0591DEB"
       abi: StrategyCommonChefLPProxy
-      startBlock: 17807400
+      startBlock: 18039234
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Deposit
         - OwnershipTransferred
         - Paused
         - StratHarvest
         - TombFees
         - Unpaused
-        - Withdraw
       abis:
         - name: StrategyCommonChefLPProxy
           file: ./abis/StrategyCommonChefLPProxy.json
+        - name: TombVaultProxy
+          file: ./abis/TombVaultProxy.json
       eventHandlers:
-        - event: Deposit(uint256)
-          handler: handleDeposit
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
         - event: Paused(address)
@@ -37,6 +35,25 @@ dataSources:
           handler: handleTombFees
         - event: Unpaused(address)
           handler: handleUnpaused
-        - event: Withdraw(uint256)
-          handler: handleWithdraw
       file: ./src/mapping.ts
+templates:
+  - name: TombVaultProxy
+    kind: ethereum/contract
+    network: chapel
+    source:
+      abi: TombVaultProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - User
+      abis:
+        - name: TombVaultProxy
+          file: ./abis/TombVaultProxy.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,indexed uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed address,indexed uint256)
+          handler: handleWithdraw

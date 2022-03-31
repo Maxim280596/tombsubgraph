@@ -1,14 +1,16 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  tvl: BigInt! # uint256
-}
-
 type StrategyData @entity {
   id: ID! # strategy address
   totalEarned: BigDecimal!
   tvl: BigDecimal!
-  totalHarvestsCount: BigInt!
+  totalHarvestsCount: BigDecimal!
+  harvestCountPerDay: BigDecimal!
+  harvestCountPerYear:BigDecimal!
+  daysCounter: BigDecimal!
+  dailyAPR: BigDecimal!
+  yearlyAPR: BigDecimal!
+  yearlyCompaundAPR: BigDecimal!
+  createStrategyDataDate: BigInt!
+  lastHarvestDate: BigInt!
 }
 
 type FeesData @entity {
@@ -25,12 +27,29 @@ type StrategyDayData @entity {
   startDayTvl: BigDecimal!
   earned: BigDecimal!
   tvl: BigDecimal!
-  dailyAPR: BigDecimal!
-  yearlyAPY: BigDecimal!
-  yearlyCompaundAPY: BigDecimal!
-  harvestsCount: BigInt!
-  tvlRaw: BigInt!
-  earnedRaw: BigInt!
-  dailyAPRRaw: BigInt!
+  dailyAPRCurrentDay: BigDecimal!
+  yearlyAPRCurrentDay: BigDecimal!
+  yearlyCompaundAPRCurrentDay: BigDecimal!
+  harvestsCountCurrentDay: BigDecimal!
+  prognosisHarvestCountPerYear: BigDecimal!
 }
 
+
+type VaultData @entity {
+  id: ID! # vault address
+  sharesTotalSupply: BigDecimal!
+  userCount: BigInt!
+  tvlUSD: BigDecimal!
+  earningPerOneShareCurrentWithCompaunding: BigDecimal!
+  earningPerOneShareCurrent: BigDecimal!
+  earningPerOneShareYearlyApy: BigDecimal!
+  earningPerOneShareAutoCompaundApy: BigDecimal!
+
+}
+
+type User @entity {
+  id: ID! # user wallet address
+  wallet: String!
+  stakedUsd: BigDecimal!
+  sharesAmount: BigDecimal!
+}
